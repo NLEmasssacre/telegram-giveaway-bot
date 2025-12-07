@@ -6,6 +6,7 @@ import time
 from dotenv import load_dotenv
 from telegram import InlineKeyboardButton, InlineKeyboardMarkup, InputMediaPhoto, Update
 from telegram.constants import ChatMemberStatus
+from telegram.error import Conflict
 from telegram.ext import (
     AIORateLimiter,
     Application,
@@ -1258,6 +1259,21 @@ def main() -> None:
             handle_text
         )
     )
+    
+    # Обработчик ошибок для Conflict (когда бот запущен в нескольких местах)
+    async def error_handler(update: object, context: ContextTypes.DEFAULT_TYPE) -> None:
+        """Обработчик ошибок"""
+        error = context.error
+        if isinstance(error, Conflict):
+            logger.warning(
+                "⚠️ Conflict: Другой экземпляр бота получает обновления. "
+                "Убедись, что локальный бот остановлен. Бот будет переподключаться..."
+            )
+            # Бот автоматически переподключится через некоторое время
+        else:
+            logger.error(f"Необработанная ошибка: {error}", exc_info=error)
+    
+    application.add_error_handler(error_handler)
 
     logger.info("Bot starting...")
     application.run_polling(
