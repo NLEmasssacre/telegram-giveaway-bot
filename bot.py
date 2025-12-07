@@ -42,8 +42,8 @@ TARGET_CHANNEL = "@kfu_torgovlya"
 CHANNEL_URL = "https://t.me/kfu_torgovlya"
 # Ссылка на пост с розыгрышем (будет обновлена позже)
 GIVEAWAY_POST_URL = "https://t.me/torgovlya_kfu/1"  # TODO: заменить на реальную ссылку
-# Дата итогов розыгрыша (будет обновлена позже)
-GIVEAWAY_END_DATE = ""  # TODO: указать дату итогов розыгрыша
+# Дата итогов розыгрыша
+GIVEAWAY_END_DATE = "14.12.2025"  # Воскресенье
 # Путь к изображению для сторис (афиша розыгрыша)
 STORY_IMAGE_PATH = "story_image.png"  # Изображение для сторис
 
